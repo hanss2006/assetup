@@ -14,7 +14,7 @@ class Assetup extends Component {
     render() {
         return (
             <div>
-                <Router basename="/assetup">
+                <Router basename={process.env.PUBLIC_URL}>
                     <HeaderComponent/>
                     <Switch>
                         <Route exact path="/" component={LoginComponent}/>
