@@ -20,7 +20,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prod": "set \"PUBLIC_URL=https://hanss2006.strangled.net/assetup\" && react-scripts build"
+    "prod": "set \"PUBLIC_URL=/assetup\" && react-scripts build"
   },
   "eslintConfig": {
     "extends": [
