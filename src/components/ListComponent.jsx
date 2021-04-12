@@ -59,9 +59,12 @@ class ListComponent extends Component {
                     <table className="table" style={{captionSide: 'top'}}>
                         <thead>
                         <tr>
+                            <th>Ticker</th>
                             <th>Description</th>
                             <th>Price</th>
+                            <th>Quantity</th>
                             <th>Date</th>
+                            <th>Currency</th>
                             <th>Update</th>
                             <th>Delete</th>
                         </tr>
@@ -71,9 +74,12 @@ class ListComponent extends Component {
                             this.state.assets.map(
                                 (asset, i) =>
                                     <tr key={asset.id}>
+                                        <td>{asset.ticker}</td>
                                         <td>{asset.description}</td>
                                         <td>{asset.price}</td>
+                                        <td>{asset.quantity}</td>
                                         <td>{moment(asset.purchaseDate).format('YYYY-MM-DD')}</td>
+                                        <td>{asset.currency}</td>
                                         <td><button className="btn btn-success" onClick={()=> this.updateClicked(asset.id)}>Update</button></td>
                                         <td><button className="btn btn-warning" onClick={()=> this.deleteClicked(asset.id)}>Delete</button></td>
                                     </tr>
