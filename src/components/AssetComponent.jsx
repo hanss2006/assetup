@@ -21,7 +21,7 @@ class AssetComponent extends Component {
     }
 
     componentDidMount() {
-        if (this.state.id === -1) {
+        if (+this.state.id === -1) {
             return;
         }
         let username = AuthenticationService.getLoggedInUserName();
@@ -85,7 +85,7 @@ class AssetComponent extends Component {
             currency: values.currency
         }
 
-        if (this.state.id === -1) {
+        if (+this.state.id === -1) {
             DataService.createAsset(username, asset)
                 .then(() => this.props.history.push('/assets'));
         } else {
