@@ -5,12 +5,13 @@ import moment from 'moment';
 
 
 class ListComponent extends Component {
+    state = {
+        assets: [],
+        message: null
+    }
+
     constructor(props) {
         super(props);
-        this.state = {
-            assets: [],
-            message: null
-        }
         this.updateClicked = this.updateClicked.bind(this);
         this.deleteClicked = this.deleteClicked.bind(this);
         this.refresh = this.refresh.bind(this);
@@ -21,31 +22,31 @@ class ListComponent extends Component {
         this.refresh();
     }
 
-    updateClicked(id){
+    updateClicked(id) {
         this.props.history.push(`/assets/${id}`);
     }
 
-    addClicked(){
+    addClicked() {
         this.props.history.push(`/assets/-1`);
     }
 
 
-    deleteClicked(id){
+    deleteClicked(id) {
         let username = AuthenticationService.getLoggedInUserName();
         DataService.deleteAsset(username, id)
             .then(
                 response => {
-                    this.setState({message : `Delete of asset ${id}`});
+                    this.setState({message: `Delete of asset ${id}`});
                     this.refresh();
                 }
             )
     }
 
-    refresh(){
+    refresh() {
         let username = AuthenticationService.getLoggedInUserName();
         DataService.retrieveAllAssets(username).then(
             response => {
-                this.setState({assets : response.data})
+                this.setState({assets: response.data})
             }
         )
     }
@@ -72,17 +73,21 @@ class ListComponent extends Component {
                         <tbody>
                         {
                             this.state.assets.map(
-                                (asset, i) =>
-                                    <tr key={asset.id}>
-                                        <td>{asset.ticker}</td>
-                                        <td>{asset.description}</td>
-                                        <td>{asset.price}</td>
-                                        <td>{asset.quantity}</td>
-                                        <td>{moment(asset.purchaseDate).format('YYYY-MM-DD')}</td>
-                                        <td>{asset.currency}</td>
-                                        <td><button className="btn btn-success" onClick={()=> this.updateClicked(asset.id)}>Update</button></td>
-                                        <td><button className="btn btn-warning" onClick={()=> this.deleteClicked(asset.id)}>Delete</button></td>
-                                    </tr>
+                            (asset, i) =>
+                            <tr key={asset.id}>
+                            <td>{asset.ticker}</td>
+                            <td>{asset.description}</td>
+                            <td>{asset.price}</td>
+                            <td>{asset.quantity}</td>
+                            <td>{moment(asset.purchaseDate).format('YYYY-MM-DD')}</td>
+                            <td>{asset.currency}</td>
+                            <td>
+                                <a href='/#' onClick={(event)=> {this.updateClicked(asset.id); event.preventDefault();}}>Update</a>
+                            </td>
+                            <td>
+                                <a href='/#' onClick={(event)=> {this.deleteClicked(asset.id); event.preventDefault();}}>Delete</a>
+                            </td>
+                            </tr>
                             )
                         }
                         </tbody>

@@ -139,7 +139,13 @@ class AssetComponent extends Component {
                                     </fieldset>
                                     <fieldset className="form-group">
                                         <label>Currency</label>
-                                        <Field className="form-control" type="text" name="currency"/>
+                                        <Field className="form-control" as="select" name="currency">
+                                            <option value="RUB">rub</option>
+                                            <option value="USD">usd</option>
+                                            <option value="EUR">eur</option>
+                                        </Field>
+
+
                                     </fieldset>
                                     <button className="btn btn-success" type="submit">Save</button>
                                 </Form>

@@ -1,3 +1,29 @@
+body { height: 100%; margin: 0; padding: 0; }
+
+table {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+  font-size: 12px;
+  background: white;
+  max-width: 70%;
+  width: 70%;
+  border-collapse: collapse;
+  text-align: left;
+}
+th {
+  font-weight: normal;
+  color: #039;
+  border-bottom: 2px solid #6678b1;
+  padding: 2px 2px;
+}
+td {
+  color: #669;
+  padding: 3px 2px;
+  transition: .3s linear;
+}
+tr:hover td {
+  color: #6699ff;
+}
+
 .footer {
   position: absolute;
   bottom: 0;
