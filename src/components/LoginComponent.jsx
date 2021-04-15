@@ -22,20 +22,20 @@ class LoginComponent extends Component {
         )
     }
 
-    loginClicked() {
+    loginClicked(e) {
+        e.preventDefault();
         AuthenticationService
             .executeJwtAuthenticationService(this.state.username, this.state.password)
             .then((response) => {
                 AuthenticationService.registerSuccessfulLoginForJwt(this.state.username, response.data.token);
-                if (this.props.updateUserName){
+                if (this.props.updateUserName) {
                     this.props.updateUserName(this.state.username);
                 }
                 this.props.history.push(`/assets`);
             }).catch(() => {
-                this.setState({ showSuccessMessage: false });
-                this.setState({ hasLoginFailed: true });
+            this.setState({showSuccessMessage: false});
+            this.setState({hasLoginFailed: true});
         })
-
     }
 
     render() {
@@ -43,13 +43,25 @@ class LoginComponent extends Component {
             <>
                 <h1>Login</h1>
                 <div className="container">
-                    {this.state.hasLoginFailed && <div className="alert alert-warning">Invalid credentials</div>}
-                    {this.state.showSuccessMessage && <div>Login successful</div>}
-                    User name: <input type="text" name="username" value={this.state.username}
-                                      onChange={this.handlerChange}/>
-                    Password: <input type="password" name="password" value={this.state.password}
-                                     onChange={this.handlerChange}/>
-                    <button onClick={this.loginClicked} className="btn btn-success">Login</button>
+                    <form onSubmit={this.loginClicked}>
+                        {this.state.hasLoginFailed && <div className="alert alert-warning">Invalid credentials</div>}
+                        {this.state.showSuccessMessage && <div>Login successful</div>}
+                        <div className="row">
+                            <label htmlFor="username">User name:</label>
+                            <input type="text" name="username" placeholder="User name" value={this.state.username}
+                                   onChange={this.handlerChange}/>
+                        </div>
+                        <div className="row">
+                            <label htmlFor="password">Password:</label>
+                            <input type="password" name="password" placeholder="Password"
+                                   value={this.state.password}
+                                   onChange={this.handlerChange}/>
+                        </div>
+                        <div className="divider"></div>
+                        <div className="row">
+                            <button type="submit" onClick={this.loginClicked} className="btn btn-success">Login</button>
+                        </div>
+                    </form>
                 </div>
             </>
         )

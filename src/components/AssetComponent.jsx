@@ -39,12 +39,11 @@ class AssetComponent extends Component {
     }
 
     checkNumber(x) {
-        if(typeof x == 'number' && !isNaN(x)){
+        if (typeof x == 'number' && !isNaN(x)) {
             // check if it is integer
             if (Number.isInteger(x)) {
                 return true;
-            }
-            else {
+            } else {
                 return true;
             }
 
@@ -116,38 +115,39 @@ class AssetComponent extends Component {
                                     <ErrorMessage name="purchaseDate" component="div" className="alert alert-warning"/>
                                     <ErrorMessage name="price" component="div" className="alert alert-warning"/>
                                     <ErrorMessage name="quantity" component="div" className="alert alert-warning"/>
-                                    <fieldset className="form-group">
+                                    <fieldset className="form-group row">
                                         <label>Ticker</label>
                                         <Field className="form-control" type="text" name="ticker"/>
                                     </fieldset>
-                                    <fieldset className="form-group">
+                                    <fieldset className="form-group row">
                                         <label>Description</label>
                                         <Field className="form-control" type="text" name="description"/>
                                     </fieldset>
-                                    <fieldset className="form-group">
+                                    <fieldset className="form-group row">
                                         <label>Price</label>
                                         <Field className="form-control" type="number" name="price"/>
                                     </fieldset>
-                                    <fieldset className="form-group">
+                                    <fieldset className="form-group row">
                                         <label>Quantity</label>
                                         <Field className="form-control" type="number" name="quantity"/>
                                     </fieldset>
 
-                                    <fieldset className="form-group">
+                                    <fieldset className="form-group row">
                                         <label>Date</label>
                                         <Field className="form-control" type="date" name="purchaseDate"/>
                                     </fieldset>
-                                    <fieldset className="form-group">
+                                    <fieldset className="form-group row">
                                         <label>Currency</label>
                                         <Field className="form-control" as="select" name="currency">
                                             <option value="RUB">rub</option>
                                             <option value="USD">usd</option>
                                             <option value="EUR">eur</option>
                                         </Field>
-
-
                                     </fieldset>
-                                    <button className="btn btn-success" type="submit">Save</button>
+                                    <div className="divider"></div>
+                                    <div className="row">
+                                        <button className="btn btn-success" type="submit">Save</button>
+                                    </div>
                                 </Form>
                             )
                         }

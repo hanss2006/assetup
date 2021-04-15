@@ -1,4 +1,45 @@
-body { height: 100%; margin: 0; padding: 0; }
+body { height: 100%; margin: 5; padding: 5; }
+.h-menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.h-menu li {
+  float: left;
+  border-right:1px solid #bbb;
+}
+
+.h-menu .right-nav {
+  float: right;
+  border-right:1px solid #bbb;
+}
+
+.h-menu li:last-child {
+  border-right: none;
+}
+
+.h-menu li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.h-menu li a:hover:not(.active) {
+  background-color: #111;
+}
+
+.h-menu .active {
+  background-color: #4CAF50;
+}
+
+.divider{
+  margin: 16px;
+}
 
 table {
   font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
@@ -19,6 +60,7 @@ td {
   color: #669;
   padding: 3px 2px;
   transition: .3s linear;
+  margin: 10px 0;
 }
 tr:hover td {
   color: #6699ff;

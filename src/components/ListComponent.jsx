@@ -56,18 +56,17 @@ class ListComponent extends Component {
             <>
                 <h1>Assets</h1>
                 {this.state.message && <div className="alert alert-success">{this.state.message}</div>}
-                <div className="container">
+                <div className="row">
                     <table className="table" style={{captionSide: 'top'}}>
                         <thead>
                         <tr>
                             <th>Ticker</th>
-                            <th>Description</th>
                             <th>Price</th>
                             <th>Quantity</th>
                             <th>Date</th>
                             <th>Currency</th>
-                            <th>Update</th>
-                            <th>Delete</th>
+                            <th>...</th>
+                            <th>-</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -75,17 +74,18 @@ class ListComponent extends Component {
                             this.state.assets.map(
                             (asset, i) =>
                             <tr key={asset.id}>
-                            <td>{asset.ticker}</td>
-                            <td>{asset.description}</td>
+                                <td><div>{asset.ticker}</div><div>{asset.description}</div></td>
                             <td>{asset.price}</td>
                             <td>{asset.quantity}</td>
                             <td>{moment(asset.purchaseDate).format('YYYY-MM-DD')}</td>
                             <td>{asset.currency}</td>
                             <td>
-                                <a href='/#' onClick={(event)=> {this.updateClicked(asset.id); event.preventDefault();}}>Update</a>
+                                <a title="Edit"
+                                    href='/#' onClick={(event)=> {this.updateClicked(asset.id); event.preventDefault();}}>...</a>
                             </td>
                             <td>
-                                <a href='/#' onClick={(event)=> {this.deleteClicked(asset.id); event.preventDefault();}}>Delete</a>
+                                <a title="Delete"
+                                    href='/#' onClick={(event)=> {this.deleteClicked(asset.id); event.preventDefault();}}>-</a>
                             </td>
                             </tr>
                             )
