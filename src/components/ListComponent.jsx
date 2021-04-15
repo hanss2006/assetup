@@ -56,8 +56,7 @@ class ListComponent extends Component {
             <>
                 <h1>Assets</h1>
                 {this.state.message && <div className="alert alert-success">{this.state.message}</div>}
-                <div className="row">
-                    <table className="table" style={{captionSide: 'top'}}>
+                    <table>
                         <thead>
                         <tr>
                             <th>Ticker</th>
@@ -92,10 +91,7 @@ class ListComponent extends Component {
                         }
                         </tbody>
                     </table>
-                    <div className="row">
-                        <button className="btn btn-success" onClick={this.addClicked}>Add</button>
-                    </div>
-                </div>
+                    <button className="btn btn-success big-size" onClick={this.addClicked}>Add</button>
             </>
         )
     }

@@ -125,7 +125,7 @@ class AssetComponent extends Component {
                                     </fieldset>
                                     <fieldset className="form-group row">
                                         <label>Price</label>
-                                        <Field className="form-control" type="number" name="price"/>
+                                        <Field className="form-control" type="number" step="0.01" name="price"/>
                                     </fieldset>
                                     <fieldset className="form-group row">
                                         <label>Quantity</label>
