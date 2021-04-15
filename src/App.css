@@ -49,6 +49,7 @@ table {
   width: 70%;
   border-collapse: collapse;
   text-align: left;
+  bs-gutter-x: 0;
 }
 th {
   font-weight: normal;
