@@ -15,13 +15,13 @@ class HeaderComponent extends Component {
                 <div className="container-fluid">
                     <Link className="navbar-brand" to="/">{this.props.userName ? this.props.userName : 'Assetup'}</Link>
                     <div className="collapse navbar-collapse" id="navbarText">
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                        <ul className="navbar-nav mr-auto">
                             <li className="nav-item">
                                 {isUserLoggedIn &&
                                     <Link className="nav-link active" to="/assets">Assets</Link>}
                             </li>
                         </ul>
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                        <ul className="navbar-nav">
                             <li className="nav-item">
                                 {!isUserLoggedIn &&
                                 <Link className="nav-link" to="/login">Login</Link>}
