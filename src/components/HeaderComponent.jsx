@@ -19,7 +19,7 @@ class HeaderComponent extends Component {
                     </li>
                     <li>
                         {isUserLoggedIn &&
-                        <Link className="nav-link active" to="/assets">Активы</Link>}
+                        <Link className="nav-link" to="/assets">Активы</Link>}
                     </li>
                     <li className="right-nav">
                         {!isUserLoggedIn &&

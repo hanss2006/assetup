@@ -47,12 +47,11 @@ class LoginComponent extends Component {
                         {this.state.hasLoginFailed && <div className="alert alert-warning">Неверное имя пользователя или пароль</div>}
                         {this.state.showSuccessMessage && <div>Вход произведен</div>}
                         <div className="row">
-                            <label htmlFor="username">Имя пользователя:</label>
                             <input type="text" name="username" placeholder="Имя пользователя" value={this.state.username}
                                    onChange={this.handlerChange}/>
                         </div>
+                        <div className="divider"></div>
                         <div className="row">
-                            <label htmlFor="password">Пароль:</label>
                             <input type="password" name="password" placeholder="Пароль"
                                    value={this.state.password}
                                    onChange={this.handlerChange}/>
