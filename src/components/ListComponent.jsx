@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import AuthenticationService from "./AuthenticationService";
 import DataService from "../api/DataService";
 import moment from 'moment';
 
@@ -38,8 +37,7 @@ class ListComponent extends Component {
         const ticker = this.id2index(id).ticker;
         var answer = window.confirm(`Удалить актив ${ticker}?`);
         if (answer) {
-            const username = AuthenticationService.getLoggedInUserName();
-            DataService.deleteAsset(username, id)
+            DataService.deleteAsset(id)
                 .then(
                     response => {
                         this.setState({message: `Удален актив ${ticker}`});
@@ -50,8 +48,7 @@ class ListComponent extends Component {
     }
 
     refresh() {
-        let username = AuthenticationService.getLoggedInUserName();
-        DataService.retrieveAllAssets(username).then(
+        DataService.retrieveAllAssets().then(
             response => {
                 this.setState({assets: response.data})
             }

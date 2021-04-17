@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import moment from "moment";
 import {Formik, Form, Field, ErrorMessage} from 'formik'
 import DataService from "../api/DataService";
-import AuthenticationService from "./AuthenticationService";
 
 class AssetComponent extends Component {
     constructor(props) {
@@ -24,8 +23,7 @@ class AssetComponent extends Component {
         if (+this.state.id === -1) {
             return;
         }
-        let username = AuthenticationService.getLoggedInUserName();
-        DataService.retrieveAsset(username, this.state.id)
+        DataService.retrieveAsset(this.state.id)
             .then(response => this.setState(
                 {
                     ticker: response.data.ticker,
@@ -73,7 +71,6 @@ class AssetComponent extends Component {
     }
 
     onSubmit(values) {
-        let username = AuthenticationService.getLoggedInUserName();
         let asset = {
             id: this.state.id,
             ticker: values.ticker,
@@ -85,10 +82,10 @@ class AssetComponent extends Component {
         }
 
         if (+this.state.id === -1) {
-            DataService.createAsset(username, asset)
+            DataService.createAsset(asset)
                 .then(() => this.props.history.push('/assets'));
         } else {
-            DataService.updateAsset(username, this.state.id, asset)
+            DataService.updateAsset(this.state.id, asset)
                 .then(() => this.props.history.push('/assets'));
         }
     }

@@ -2,24 +2,24 @@ import axios from "axios";
 import {JPA_API_URL} from "../Constants";
 
 class DataService {
-    retrieveAllAssets(name){
-        return axios.get(`${JPA_API_URL}/users/${name}/assets`);
+    retrieveAllAssets(){
+        return axios.get(`${JPA_API_URL}/assets`);
     }
 
     retrieveAsset(name, id){
-        return axios.get(`${JPA_API_URL}/users/${name}/assets/${id}`);
+        return axios.get(`${JPA_API_URL}/assets/${id}`);
     }
 
-    deleteAsset(name, id){
-        return axios.delete(`${JPA_API_URL}/users/${name}/assets/${id}`);
+    deleteAsset(id){
+        return axios.delete(`${JPA_API_URL}/assets/${id}`);
     }
 
-    updateAsset(name, id, asset){
-        return axios.put(`${JPA_API_URL}/users/${name}/assets/${id}`, asset);
+    updateAsset(id, asset){
+        return axios.put(`${JPA_API_URL}/assets/${id}`, asset);
     }
 
-    createAsset(name, asset){
-        return axios.post(`${JPA_API_URL}/users/${name}/assets/`, asset);
+    createAsset(asset){
+        return axios.post(`${JPA_API_URL}/assets/`, asset);
     }
 
 }
