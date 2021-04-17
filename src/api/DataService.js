@@ -6,7 +6,7 @@ class DataService {
         return axios.get(`${JPA_API_URL}/assets`);
     }
 
-    retrieveAsset(name, id){
+    retrieveAsset(id){
         return axios.get(`${JPA_API_URL}/assets/${id}`);
     }
 
