@@ -41,25 +41,25 @@ class LoginComponent extends Component {
     render() {
         return (
             <>
-                <h1>Login</h1>
+                <h1>Вход в программу</h1>
                 <div className="container">
                     <form onSubmit={this.loginClicked}>
-                        {this.state.hasLoginFailed && <div className="alert alert-warning">Invalid credentials</div>}
-                        {this.state.showSuccessMessage && <div>Login successful</div>}
+                        {this.state.hasLoginFailed && <div className="alert alert-warning">Неверное имя пользователя или пароль</div>}
+                        {this.state.showSuccessMessage && <div>Вход произведен</div>}
                         <div className="row">
-                            <label htmlFor="username">User name:</label>
-                            <input type="text" name="username" placeholder="User name" value={this.state.username}
+                            <label htmlFor="username">Имя пользователя:</label>
+                            <input type="text" name="username" placeholder="Имя пользователя" value={this.state.username}
                                    onChange={this.handlerChange}/>
                         </div>
                         <div className="row">
-                            <label htmlFor="password">Password:</label>
-                            <input type="password" name="password" placeholder="Password"
+                            <label htmlFor="password">Пароль:</label>
+                            <input type="password" name="password" placeholder="Пароль"
                                    value={this.state.password}
                                    onChange={this.handlerChange}/>
                         </div>
                         <div className="divider"></div>
                         <div className="row">
-                            <button type="submit" onClick={this.loginClicked} className="btn btn-success">Login</button>
+                            <button type="submit" onClick={this.loginClicked} className="btn btn-success">Вход</button>
                         </div>
                     </form>
                 </div>

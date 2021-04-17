@@ -2,7 +2,7 @@ import React from "react";
 
 
 function ErrorComponent() {
-    return (<div>Error occurred</div>)
+    return (<div>Ошибка</div>)
 }
 
 export default ErrorComponent

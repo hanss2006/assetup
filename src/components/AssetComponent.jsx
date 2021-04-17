@@ -55,19 +55,19 @@ class AssetComponent extends Component {
     validate(values) {
         let errors = {};
         if (!values.ticker) {
-            errors.ticker = 'Enter a ticker';
+            errors.ticker = 'Введите тикер';
         }
         if (!values.description) {
-            errors.description = 'Enter a description';
+            errors.description = 'Введите описание';
         }
         if (!this.checkNumber(values.price)) {
-            errors.price = 'Price should be a number';
+            errors.price = 'Значение в поле цена должно быть цифровым';
         }
         if (!this.checkNumber(values.quantity)) {
-            errors.price = 'Quantity should be a number';
+            errors.price = 'Значение в поле количество должно быть цифровым';
         }
         if (!moment(values.purchaseDate).isValid()) {
-            errors.purchaseDate = 'Enter a valid target date';
+            errors.purchaseDate = 'Введите значение даты';
         }
         return errors;
     }
@@ -97,7 +97,7 @@ class AssetComponent extends Component {
         let {ticker, description, price, quantity, purchaseDate, currency} = this.state;
         return (
             <div>
-                <h1>Asset</h1>
+                <h1>Актив</h1>
                 <div className='container'>
                     <Formik
                         initialValues={{ticker, description, price, quantity, purchaseDate, currency}}
@@ -116,37 +116,37 @@ class AssetComponent extends Component {
                                     <ErrorMessage name="price" component="div" className="alert alert-warning"/>
                                     <ErrorMessage name="quantity" component="div" className="alert alert-warning"/>
                                     <fieldset className="form-group row">
-                                        <label>Ticker</label>
+                                        <label>Тикер</label>
                                         <Field className="form-control" type="text" name="ticker"/>
                                     </fieldset>
                                     <fieldset className="form-group row">
-                                        <label>Description</label>
+                                        <label>Описание</label>
                                         <Field className="form-control" type="text" name="description"/>
                                     </fieldset>
                                     <fieldset className="form-group row">
-                                        <label>Price</label>
+                                        <label>Цена</label>
                                         <Field className="form-control" type="number" step="0.01" name="price"/>
                                     </fieldset>
                                     <fieldset className="form-group row">
-                                        <label>Quantity</label>
+                                        <label>Количество</label>
                                         <Field className="form-control" type="number" name="quantity"/>
                                     </fieldset>
 
                                     <fieldset className="form-group row">
-                                        <label>Date</label>
+                                        <label>Дата</label>
                                         <Field className="form-control" type="date" name="purchaseDate"/>
                                     </fieldset>
                                     <fieldset className="form-group row">
-                                        <label>Currency</label>
+                                        <label>Валюта</label>
                                         <Field className="form-control" as="select" name="currency">
-                                            <option value="RUB">rub</option>
-                                            <option value="USD">usd</option>
-                                            <option value="EUR">eur</option>
+                                            <option value="RUB">Рубль</option>
+                                            <option value="USD">Доллар</option>
+                                            <option value="EUR">Евро</option>
                                         </Field>
                                     </fieldset>
                                     <div className="divider"></div>
                                     <div className="row">
-                                        <button className="btn btn-success" type="submit">Save</button>
+                                        <button className="btn btn-success" type="submit">Сохранить</button>
                                     </div>
                                 </Form>
                             )

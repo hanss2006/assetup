@@ -5,7 +5,7 @@ class WelcomeComponent extends Component {
     render() {
         return (
             <>
-                <h1>Welcome!</h1>
+                <h1>Добро пожаловать!</h1>
                 <div className="container">
                     Welcome {this.props.match.params.name}.
                     You can edit list <Link to="/assets">here</Link>

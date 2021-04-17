@@ -30,16 +30,23 @@ class ListComponent extends Component {
         this.props.history.push(`/assets/-1`);
     }
 
+    id2index(id) {
+        return this.state.assets.find(el => el.id === id)
+    }
 
     deleteClicked(id) {
-        let username = AuthenticationService.getLoggedInUserName();
-        DataService.deleteAsset(username, id)
-            .then(
-                response => {
-                    this.setState({message: `Delete of asset ${id}`});
-                    this.refresh();
-                }
-            )
+        const ticker = this.id2index(id).ticker;
+        var answer = window.confirm(`Удалить актив ${ticker}?`);
+        if (answer) {
+            const username = AuthenticationService.getLoggedInUserName();
+            DataService.deleteAsset(username, id)
+                .then(
+                    response => {
+                        this.setState({message: `Удален актив ${ticker}`});
+                        this.refresh();
+                    }
+                )
+        }
     }
 
     refresh() {
@@ -54,18 +61,20 @@ class ListComponent extends Component {
     render() {
         return (
             <>
-                <h1>Assets</h1>
+                <h1>Активы</h1>
+                <button className="btn btn-success big-size" onClick={this.addClicked}>Новая запись</button>
                 {this.state.message && <div className="alert alert-success">{this.state.message}</div>}
+                <div className="divider"></div>
                     <table>
                         <thead>
                         <tr>
-                            <th>Ticker</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Date</th>
-                            <th>Currency</th>
-                            <th>...</th>
-                            <th>-</th>
+                            <th>Тикер</th>
+                            <th>Цена</th>
+                            <th>Количество</th>
+                            <th>Дата</th>
+                            <th>Валюта</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -76,22 +85,23 @@ class ListComponent extends Component {
                                 <td><div>{asset.ticker}</div><div>{asset.description}</div></td>
                             <td>{asset.price}</td>
                             <td>{asset.quantity}</td>
-                            <td>{moment(asset.purchaseDate).format('YYYY-MM-DD')}</td>
+                            <td>{moment(asset.purchaseDate).format('DD.MM.YYYY')}</td>
                             <td>{asset.currency}</td>
                             <td>
-                                <a title="Edit"
-                                    href='/#' onClick={(event)=> {this.updateClicked(asset.id); event.preventDefault();}}>...</a>
+                                <button title="Редактировать"
+                                    onClick={(event)=> {this.updateClicked(asset.id); event.preventDefault();}}
+                                   className="btn btn-success bg-font">...</button>
                             </td>
                             <td>
-                                <a title="Delete"
-                                    href='/#' onClick={(event)=> {this.deleteClicked(asset.id); event.preventDefault();}}>-</a>
+                                <button title="Удалить"
+                                    onClick={(event)=> {this.deleteClicked(asset.id); event.preventDefault();}}
+                                   className="btn btn-warning bg-font">-</button>
                             </td>
                             </tr>
                             )
                         }
                         </tbody>
                     </table>
-                    <button className="btn btn-success big-size" onClick={this.addClicked}>Add</button>
             </>
         )
     }

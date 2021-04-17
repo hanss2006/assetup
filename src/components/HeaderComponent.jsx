@@ -19,13 +19,13 @@ class HeaderComponent extends Component {
                     </li>
                     <li>
                         {isUserLoggedIn &&
-                        <Link className="nav-link active" to="/assets">Assets</Link>}
+                        <Link className="nav-link active" to="/assets">Активы</Link>}
                     </li>
                     <li className="right-nav">
                         {!isUserLoggedIn &&
-                        <Link className="nav-link" to="/login">Login</Link>}
+                        <Link className="nav-link" to="/login">Вход</Link>}
                         {isUserLoggedIn &&
-                        <Link className="nav-link" to="/logout" onClick={this.logoutClick}>Logout</Link>}
+                        <Link className="nav-link" to="/logout" onClick={this.logoutClick}>Выход</Link>}
                     </li>
                 </ul>
             </nav>

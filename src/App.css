@@ -3,6 +3,12 @@ body { height: 100%; margin: 5; padding: 5; }
 .big-size{
   width: 100%;
 }
+
+.bg-font{
+  font-size: large;
+  font-weight: bolder;
+  text-decoration: none;
+}
 .h-menu ul {
   list-style-type: none;
   margin: 0;
