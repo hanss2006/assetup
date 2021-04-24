@@ -148,6 +148,13 @@ class Micex {
       .then(Micex._responseFirstBlockToArray);
   }
 
+  // https://iss.moex.com/iss/engines/stock/markets/shares/securities/FXIT/candles.json
+  static candles(engine = required('engine'), market = required('market'), security = required('security')) {
+    return Micex._request(`engines/${engine}/markets/${market}/securities/${security}/candles`)
+        .then(Micex._responseCandelsDataToArray);
+  }
+
+
   static boards(engine = required('engine'), market = required('market')) {
     return Micex._request(`engines/${engine}/markets/${market}/boards`)
       .then(Micex._responseFirstBlockToArray);
@@ -221,6 +228,13 @@ class Micex {
   static _responseBlockToArray(block) {
     let rows = block.data.map(
       (data) => arrayCombine(block.columns, data));
+    return rows;
+  }
+
+  //Candles data
+  static _responseCandelsDataToArray(block) {
+    let rows = block.candles.data.map(
+        (data) => arrayCombine(block.candles.columns, data));
     return rows;
   }
 

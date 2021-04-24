@@ -2,11 +2,24 @@ import React, {Component} from 'react'
 import moment from "moment";
 import DataService from "../api/DataService";
 import ReactApexChart from "react-apexcharts";
+import Micex from '../micex'
+
 
 
 class AssetGraphComponent extends Component {
     constructor(props) {
         super(props);
+
+        let engine='stock', market='shares', seurity='FXIT';
+
+        Micex.candles(engine, market, seurity)
+            .then(
+                function (answer) {
+                    console.log(answer); // e.g. 64.04
+                }
+            );
+
+
         this.state = {
             id: this.props.match.params.id,
             ticker: '',
@@ -27,10 +40,10 @@ class AssetGraphComponent extends Component {
                     id: 'candles',
                     toolbar: {
                         autoSelected: 'pan',
-                        show: false
+                        show: true
                     },
                     zoom: {
-                        enabled: false
+                        enabled: true
                     },
                 },
                 plotOptions: {
@@ -104,13 +117,10 @@ class AssetGraphComponent extends Component {
                 },
                 yaxis: {
                     labels: {
-                        show: false
+                        show: true
                     }
                 }
             }
-
-
-
 
 
         }
@@ -139,13 +149,13 @@ class AssetGraphComponent extends Component {
             <div>
                 <h1>График</h1>
                 <div className='container'>
-                    <div className="chart-box">
-                        <div id="chart-candlestick">
-                            <ReactApexChart options={this.state.options} series={this.state.series} type="candlestick" height={290} />
-                        </div>
-                        <div id="chart-bar">
-                            <ReactApexChart options={this.state.optionsBar} series={this.state.seriesBar} type="bar" height={160} />
-                        </div>
+                    <div id="chart-candlestick">
+                        <ReactApexChart options={this.state.options} series={this.state.series} type="candlestick"
+                                        height={290}/>
+                    </div>
+                    <div id="chart-bar11">
+                        <ReactApexChart options={this.state.optionsBar} series={this.state.seriesBar} type="bar"
+                                        height={160}/>
                     </div>
                 </div>
             </div>
