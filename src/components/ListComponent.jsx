@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import DataService from "../api/DataService";
 import moment from 'moment';
+import {Link} from "react-router-dom";
 
 
 class ListComponent extends Component {
@@ -79,21 +80,30 @@ class ListComponent extends Component {
                             this.state.assets.map(
                             (asset, i) =>
                             <tr key={asset.id}>
-                                <td><div>{asset.ticker}</div><div>{asset.description}</div></td>
-                            <td>{asset.price}</td>
-                            <td>{asset.quantity}</td>
-                            <td>{moment(asset.purchaseDate).format('DD.MM.YYYY')}</td>
-                            <td>{asset.currency}</td>
-                            <td>
-                                <button title="Редактировать"
-                                    onClick={(event)=> {this.updateClicked(asset.id); event.preventDefault();}}
-                                   className="btn btn-success bg-font">...</button>
-                            </td>
-                            <td>
-                                <button title="Удалить"
-                                    onClick={(event)=> {this.deleteClicked(asset.id); event.preventDefault();}}
-                                   className="btn btn-warning bg-font">-</button>
-                            </td>
+                                <td>
+                                    <Link to={`/graph/assets/${asset.id}`}>
+                                        <div>
+                                            {asset.ticker}
+                                        </div>
+                                        <div>
+                                            {asset.description}
+                                        </div>
+                                    </Link>
+                                </td>
+                                <td>{asset.price}</td>
+                                <td>{asset.quantity}</td>
+                                <td>{moment(asset.purchaseDate).format('DD.MM.YYYY')}</td>
+                                <td>{asset.currency}</td>
+                                <td>
+                                    <button title="Редактировать"
+                                        onClick={(event)=> {this.updateClicked(asset.id); event.preventDefault();}}
+                                        className="btn btn-success bg-font">...</button>
+                                </td>
+                                <td>
+                                    <button title="Удалить"
+                                        onClick={(event)=> {this.deleteClicked(asset.id); event.preventDefault();}}
+                                        className="btn btn-warning bg-font">-</button>
+                                </td>
                             </tr>
                             )
                         }

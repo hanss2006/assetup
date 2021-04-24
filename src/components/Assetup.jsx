@@ -8,6 +8,7 @@ import LogoutComponent from "./LogoutComponent";
 import WelcomeComponent from "./WelcomeComponent";
 import ErrorComponent from "./ErrorComponent";
 import AssetComponent from "./AssetComponent";
+import AssetGraphComponent from "./AssetGraphComponent";
 
 class Assetup extends Component {
     state = {
@@ -33,6 +34,7 @@ class Assetup extends Component {
                         <AuthenticatedRoute path="/welcome/:name" component={WelcomeComponent}/>
                         <AuthenticatedRoute path="/assets/:id" component={AssetComponent}/>
                         <AuthenticatedRoute path="/assets" component={ListComponent}/>
+                        <AuthenticatedRoute path="/graph/assets/:id/" component={AssetGraphComponent}/>
                         <AuthenticatedRoute path="/logout" component={LogoutComponent}/>
                         <Route component={ErrorComponent}/>
                     </Switch>
