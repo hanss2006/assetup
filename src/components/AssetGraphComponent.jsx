@@ -1,34 +1,19 @@
 import React, {Component} from 'react'
-import moment from "moment";
 import DataService from "../api/DataService";
 import ReactApexChart from "react-apexcharts";
+import moment from "moment";
 import Micex from '../micex'
 
 
-
 class AssetGraphComponent extends Component {
+    seriesData;
+    seriesDataLinear;
+
     constructor(props) {
         super(props);
 
-        let engine='stock', market='shares', seurity='FXIT';
-
-        Micex.candles(engine, market, seurity)
-            .then(
-                function (answer) {
-                    console.log(answer); // e.g. 64.04
-                }
-            );
-
-
         this.state = {
             id: this.props.match.params.id,
-            ticker: '',
-            description: '',
-            price: 0,
-            quantity: 0,
-            purchaseDate: moment(new Date()).format('YYYY-MM-YY'),
-            currency: 'RUB',
-
 
             series: [{
                 data: seriesData
@@ -40,10 +25,10 @@ class AssetGraphComponent extends Component {
                     id: 'candles',
                     toolbar: {
                         autoSelected: 'pan',
-                        show: true
+                        show: false
                     },
                     zoom: {
-                        enabled: true
+                        enabled: false
                     },
                 },
                 plotOptions: {
@@ -72,10 +57,10 @@ class AssetGraphComponent extends Component {
                         target: 'candles'
                     },
                     selection: {
-                        enabled: false,
+                        enabled: true,
                         xaxis: {
-                            min: new Date('01 Jan 2016').getTime(),
-                            max: new Date('30 Dec 2017').getTime()
+                            min: new Date('20 Jan 2017').getTime(),
+                            max: new Date('10 Dec 2017').getTime()
                         },
                         fill: {
                             color: '#ccc',
@@ -117,30 +102,167 @@ class AssetGraphComponent extends Component {
                 },
                 yaxis: {
                     labels: {
-                        show: true
+                        show: false
                     }
                 }
-            }
+            },
 
 
-        }
+        };
+
     }
 
+
     componentDidMount() {
-        if (+this.state.id === -1) {
-            return;
-        }
         DataService.retrieveAsset(this.state.id)
-            .then(response => this.setState(
-                {
-                    ticker: response.data.ticker,
-                    description: response.data.description,
-                    price: response.data.price,
-                    quantity: response.data.quantity,
-                    purchaseDate: moment(response.data.purchaseDate).format('YYYY-MM-DD'),
-                    currency: response.data.currency
-                }
-            ));
+            .then(response => {
+                let engine = 'stock', market = 'shares';
+                let seurity = response.data.ticker
+                this.setState(
+                    {
+                        ticker: response.data.ticker,
+                        description: response.data.description,
+                        price: response.data.price,
+                        quantity: response.data.quantity,
+                        purchaseDate: moment(response.data.purchaseDate).format('YYYY-MM-DD'),
+                        currency: response.data.currency
+                    }
+                )
+
+                Micex.candles(engine, market, seurity)
+                    .then(
+                        answer => {
+                            this.seriesData = answer.map(item => {
+                                const container = {};
+
+                                container['x'] = item.end;
+                                container.['y'] = [item.open, item.high, item.low, item.close];
+
+                                return container;
+                            });
+                            this.seriesDataLinear = answer.map(item => {
+                                const container = {};
+
+                                container['x'] = item.end;
+                                container.['y'] = item.value;
+
+                                return container;
+                            });
+
+
+                            this.setState({
+                                /*
+                                                        id: this.props.match.params.id,
+                                                        ticker: '',
+                                                        description: '',
+                                                        price: 0,
+                                                        quantity: 0,
+                                                        purchaseDate: moment(new Date()).format('YYYY-MM-YY'),
+                                                        currency: 'RUB',
+                                */
+
+                                series: [{
+                                    data: this.seriesData
+                                }],
+                                options: {
+                                    chart: {
+                                        type: 'candlestick',
+                                        height: 290,
+                                        id: 'candles',
+                                        toolbar: {
+                                            autoSelected: 'pan',
+                                            show: true
+                                        },
+                                        zoom: {
+                                            enabled: true
+                                        },
+                                    },
+                                    plotOptions: {
+                                        candlestick: {
+                                            colors: {
+                                                upward: '#3C90EB',
+                                                downward: '#DF7D46'
+                                            }
+                                        }
+                                    },
+                                    xaxis: {
+                                        type: 'datetime'
+                                    }
+                                },
+
+                                seriesBar: [{
+                                    name: 'volume',
+                                    data: this.seriesDataLinear
+                                }],
+                                optionsBar: {
+                                    chart: {
+                                        height: 160,
+                                        type: 'bar',
+                                        brush: {
+                                            enabled: true,
+                                            target: 'candles'
+                                        },
+                                        selection: {
+                                            enabled: false,
+                                            xaxis: {
+                                                min: new Date('2013-10-31').getTime(),
+                                                max: new Date('2014-12-30').getTime()
+                                            },
+                                            fill: {
+                                                color: '#ccc',
+                                                opacity: 0.4
+                                            },
+                                            stroke: {
+                                                color: '#0D47A1',
+                                            }
+                                        },
+                                    },
+                                    dataLabels: {
+                                        enabled: false
+                                    },
+                                    plotOptions: {
+                                        bar: {
+                                            columnWidth: '80%',
+                                            colors: {
+                                                ranges: [{
+                                                    from: -1000,
+                                                    to: 0,
+                                                    color: '#F15B46'
+                                                }, {
+                                                    from: 1,
+                                                    to: 10000,
+                                                    color: '#FEB019'
+                                                }],
+
+                                            },
+                                        }
+                                    },
+                                    stroke: {
+                                        width: 0
+                                    },
+                                    xaxis: {
+                                        type: 'datetime',
+                                        axisBorder: {
+                                            offsetX: 13
+                                        }
+                                    },
+                                    yaxis: {
+                                        labels: {
+                                            show: true
+                                        }
+                                    }
+                                }
+                            });
+                        }, error => {
+                            console.log(`Неизвестная ошибка: ${error}`);
+                        });
+
+
+
+            });
+
+
+
     }
 
     render() {
@@ -164,6 +286,32 @@ class AssetGraphComponent extends Component {
 }
 
 export default AssetGraphComponent;
+
+
+/*
+Open High Low Close
+* {
+x: new Date(2016, 1, 1),
+y: [51.98, 56.29, 51.59, 53.85]
+}
+*
+*     {
+x: new Date(2017, 11, 1),
+y: 43.04
+}
+*
+* {
+* begin: "2013-10-31 17:50:00"
+close: 988.9
+end: "2013-10-31 17:59:59"
+high: 989
+low: 988.9
+open: 989
+value: 1977.9
+volume: 2
+* }
+*
+* */
 
 var seriesData = [{
     x: new Date(2016, 1, 1),
@@ -352,4 +500,3 @@ var seriesDataLinear = [{
         y: 43.04
     }
 ]
-
