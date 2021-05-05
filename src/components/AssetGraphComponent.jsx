@@ -15,20 +15,21 @@ class AssetGraphComponent extends Component {
         this.state = {
             id: this.props.match.params.id,
 
-            series: [{
-                data: seriesData
-            }],
+            series: [],
             options: {
+                noData: {
+                    text: 'Loading...'
+                },
                 chart: {
                     type: 'candlestick',
                     height: 290,
                     id: 'candles',
                     toolbar: {
                         autoSelected: 'pan',
-                        show: false
+                        show: true
                     },
                     zoom: {
-                        enabled: false
+                        enabled: true
                     },
                 },
                 plotOptions: {
@@ -44,11 +45,11 @@ class AssetGraphComponent extends Component {
                 }
             },
 
-            seriesBar: [{
-                name: 'volume',
-                data: seriesDataLinear
-            }],
+            seriesBar: [],
             optionsBar: {
+                noData: {
+                    text: 'Loading...'
+                },
                 chart: {
                     height: 160,
                     type: 'bar',
@@ -59,8 +60,8 @@ class AssetGraphComponent extends Component {
                     selection: {
                         enabled: true,
                         xaxis: {
-                            min: new Date('20 Jan 2017').getTime(),
-                            max: new Date('10 Dec 2017').getTime()
+                            min: new Date('2013-10-31').getTime(),
+                            max: new Date('2014-12-30').getTime()
                         },
                         fill: {
                             color: '#ccc',
@@ -164,103 +165,17 @@ class AssetGraphComponent extends Component {
                                 series: [{
                                     data: this.seriesData
                                 }],
-                                options: {
-                                    chart: {
-                                        type: 'candlestick',
-                                        height: 290,
-                                        id: 'candles',
-                                        toolbar: {
-                                            autoSelected: 'pan',
-                                            show: true
-                                        },
-                                        zoom: {
-                                            enabled: true
-                                        },
-                                    },
-                                    plotOptions: {
-                                        candlestick: {
-                                            colors: {
-                                                upward: '#3C90EB',
-                                                downward: '#DF7D46'
-                                            }
-                                        }
-                                    },
-                                    xaxis: {
-                                        type: 'datetime'
-                                    }
-                                },
-
                                 seriesBar: [{
                                     name: 'volume',
                                     data: this.seriesDataLinear
-                                }],
-                                optionsBar: {
-                                    chart: {
-                                        height: 160,
-                                        type: 'bar',
-                                        brush: {
-                                            enabled: true,
-                                            target: 'candles'
-                                        },
-                                        selection: {
-                                            enabled: false,
-                                            xaxis: {
-                                                min: new Date('2013-10-31').getTime(),
-                                                max: new Date('2014-12-30').getTime()
-                                            },
-                                            fill: {
-                                                color: '#ccc',
-                                                opacity: 0.4
-                                            },
-                                            stroke: {
-                                                color: '#0D47A1',
-                                            }
-                                        },
-                                    },
-                                    dataLabels: {
-                                        enabled: false
-                                    },
-                                    plotOptions: {
-                                        bar: {
-                                            columnWidth: '80%',
-                                            colors: {
-                                                ranges: [{
-                                                    from: -1000,
-                                                    to: 0,
-                                                    color: '#F15B46'
-                                                }, {
-                                                    from: 1,
-                                                    to: 10000,
-                                                    color: '#FEB019'
-                                                }],
-
-                                            },
-                                        }
-                                    },
-                                    stroke: {
-                                        width: 0
-                                    },
-                                    xaxis: {
-                                        type: 'datetime',
-                                        axisBorder: {
-                                            offsetX: 13
-                                        }
-                                    },
-                                    yaxis: {
-                                        labels: {
-                                            show: true
-                                        }
-                                    }
-                                }
+                                }]
                             });
                         }, error => {
                             console.log(`Неизвестная ошибка: ${error}`);
                         });
 
 
-
             });
-
 
 
     }
@@ -313,6 +228,7 @@ volume: 2
 *
 * */
 
+/*
 var seriesData = [{
     x: new Date(2016, 1, 1),
     y: [51.98, 56.29, 51.59, 53.85]
@@ -500,3 +416,4 @@ var seriesDataLinear = [{
         y: 43.04
     }
 ]
+*/
