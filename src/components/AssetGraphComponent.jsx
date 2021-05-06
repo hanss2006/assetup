@@ -17,10 +17,45 @@ class AssetGraphComponent extends Component {
 
             series: [],
             options: {
+                annotations: {
+                    xaxis: [
+                        {
+                            x: new Date('2014-06-01').getTime(),
+                            borderColor: '#00E396',
+                            label: {
+                                borderColor: '#00E396',
+                                orientation: 'vertical',
+                                text: 'Покупка'
+                            }
+                        }
+                    ]
+                },
+
                 noData: {
-                    text: 'Loading...'
+                    text: 'Загрузка...'
                 },
                 chart: {
+                    locales: [{
+                        "name": "ru",
+                        "options": {
+                            "months": ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
+                            "shortMonths": ["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"],
+                            "days": ["Воскресенье", "Понедельник", "Вторнник", "Среда", "Четверг", "Пятница", "Суббота"],
+                            "shortDays": ["Вск", "Пон", "Втн", "Срд", "Чет", "Пят", "Суб"],
+                            "toolbar": {
+                                "exportToSVG": "Сохранить SVG",
+                                "exportToPNG": "Сохранить PNG",
+                                "menu": "Меню",
+                                "selection": "Выбор",
+                                "selectionZoom": "Выбор увеличить",
+                                "zoomIn": "Приблизить",
+                                "zoomOut": "Удалить",
+                                "pan": "Передвинуть",
+                                "reset": "Сбросить увеличение"
+                            }
+                        }
+                    }],
+                    defaultLocale: "ru",
                     type: 'candlestick',
                     height: 290,
                     id: 'candles',
@@ -44,13 +79,50 @@ class AssetGraphComponent extends Component {
                     type: 'datetime'
                 }
             },
-
+            dataLabels: {
+                enabled: true
+            },
             seriesBar: [],
             optionsBar: {
+
+                annotations: {
+                    xaxis: [
+                        {
+                            x: new Date('2014-06-01').getTime(),
+                            borderColor: '#00E396',
+                            label: {
+                                borderColor: '#00E396',
+                                orientation: 'vertical',
+                                text: 'Покупка'
+                            }
+                        }
+                    ]
+                },
                 noData: {
-                    text: 'Loading...'
+                    text: 'Загрузка...'
                 },
                 chart: {
+                    locales: [{
+                        "name": "ru",
+                        "options": {
+                            "months": ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
+                            "shortMonths": ["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"],
+                            "days": ["Воскресенье", "Понедельник", "Вторнник", "Среда", "Четверг", "Пятница", "Суббота"],
+                            "shortDays": ["Вск", "Пон", "Втн", "Срд", "Чет", "Пят", "Суб"],
+                            "toolbar": {
+                                "exportToSVG": "Сохранить SVG",
+                                "exportToPNG": "Сохранить PNG",
+                                "menu": "Меню",
+                                "selection": "Выбор",
+                                "selectionZoom": "Выбор увеличить",
+                                "zoomIn": "Приблизить",
+                                "zoomOut": "Удалить",
+                                "pan": "Передвинуть",
+                                "reset": "Сбросить увеличение"
+                            }
+                        }
+                    }],
+                    defaultLocale: "ru",
                     height: 160,
                     type: 'bar',
                     brush: {
@@ -58,7 +130,7 @@ class AssetGraphComponent extends Component {
                         target: 'candles'
                     },
                     selection: {
-                        enabled: true,
+                        enabled: false,
                         xaxis: {
                             min: new Date('2013-10-31').getTime(),
                             max: new Date('2014-12-30').getTime()
@@ -103,7 +175,7 @@ class AssetGraphComponent extends Component {
                 },
                 yaxis: {
                     labels: {
-                        show: false
+                        show: true
                     }
                 }
             },
@@ -152,15 +224,13 @@ class AssetGraphComponent extends Component {
 
 
                             this.setState({
-                                /*
-                                                        id: this.props.match.params.id,
-                                                        ticker: '',
-                                                        description: '',
-                                                        price: 0,
-                                                        quantity: 0,
-                                                        purchaseDate: moment(new Date()).format('YYYY-MM-YY'),
-                                                        currency: 'RUB',
-                                */
+                                id: this.props.match.params.id,
+                                ticker: '',
+                                description: '',
+                                price: 0,
+                                quantity: 0,
+                                purchaseDate: moment(new Date()).format('YYYY-MM-YY'),
+                                currency: 'RUB',
 
                                 series: [{
                                     data: this.seriesData
