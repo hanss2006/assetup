@@ -14,7 +14,7 @@ class AssetComponent extends Component {
             quantity: 0,
             purchaseDate: moment(new Date()).format('YYYY-MM-YY'),
             currency_id: 8,
-            currencies: [{'id':8, 'name':'rub', 'description':'рубль'}]
+            currencies: []
         }
         this.currencies = DataService.retrieveAllCurrency();
 
