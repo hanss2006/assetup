@@ -93,7 +93,7 @@ class ListComponent extends Component {
                                 <td>{asset.price}</td>
                                 <td>{asset.quantity}</td>
                                 <td>{moment(asset.purchaseDate).format('DD.MM.YYYY')}</td>
-                                <td>{asset.currency}</td>
+                                <td>{asset.currency.name}</td>
                                 <td>
                                     <button title="Редактировать"
                                         onClick={(event)=> {this.updateClicked(asset.id); event.preventDefault();}}

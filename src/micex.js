@@ -2,6 +2,7 @@
 import arrayCombine from './array_combine';
 import request from 'request';
 import _ from 'lodash';
+import axios from "axios";
 let debug = require('debug')('micex.api');
 
 function required(parameter = '') {
@@ -238,7 +239,7 @@ class Micex {
     return rows;
   }
 
-  static _request(method, query = {}) {
+  static request(method, query = {}) {
     let BASE = method ? API_BASE + '/' : API_BASE;
     return new Promise((resolve, reject) => {
       request(`${BASE}${method}.json`, {
@@ -261,6 +262,49 @@ class Micex {
       });
     });
   }
+
+  static _request(method, query = {}) {
+    let BASE = method ? API_BASE + '/' : API_BASE;
+
+    if (method){
+      const url = `${BASE}${method}.json`;
+      console.log(url);
+      return axios.get(url, {
+        mode: 'no-cors',
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Credentials':true
+        },
+        withCredentials: false,
+        crossdomain: true,
+        crossorigin:true
+      });
+    }
+
+    return new Promise((resolve, reject) => {
+      request(`${BASE}${method}.json`, {
+        qs: query
+      }, (error, response, body) => {
+        if (!error && response.statusCode === 200) {
+          let json;
+          try {
+            json = JSON.parse(body);
+          } catch (e) {
+            debug('Unable to parse body');
+            debug(body);
+            return reject(e);
+          }
+          resolve(json);
+        } else {
+          error = error || (response.statusCode + ' ' + response.statusMessage);
+          reject(error);
+        }
+      });
+    });
+  }
+
 }
 
 export default Micex;

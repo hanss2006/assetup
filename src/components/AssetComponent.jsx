@@ -13,27 +13,40 @@ class AssetComponent extends Component {
             price: 0,
             quantity: 0,
             purchaseDate: moment(new Date()).format('YYYY-MM-YY'),
-            currency: 'RUB'
+            currency_id: 8,
+            currencies: [{'id':8, 'name':'rub', 'description':'рубль'}]
         }
+        this.currencies = DataService.retrieveAllCurrency();
+
         this.onSubmit = this.onSubmit.bind(this);
         this.validate = this.validate.bind(this);
     }
 
     componentDidMount() {
+        DataService.retrieveAllCurrency()
+            .then(response => {
+                this.setState(
+                    {
+                        currencies: response.data
+                    }
+                );
+            });
         if (+this.state.id === -1) {
             return;
         }
         DataService.retrieveAsset(this.state.id)
-            .then(response => this.setState(
-                {
-                    ticker: response.data.ticker,
-                    description: response.data.description,
-                    price: response.data.price,
-                    quantity: response.data.quantity,
-                    purchaseDate: moment(response.data.purchaseDate).format('YYYY-MM-DD'),
-                    currency: response.data.currency
-                }
-            ));
+            .then(response => {
+                this.setState(
+                    {
+                        ticker: response.data.ticker,
+                        description: response.data.description,
+                        price: response.data.price,
+                        quantity: response.data.quantity,
+                        purchaseDate: moment(response.data.purchaseDate).format('YYYY-MM-DD'),
+                        currency_id: response.data.currency_id
+                    }
+                );
+            });
     }
 
     checkNumber(x) {
@@ -78,7 +91,7 @@ class AssetComponent extends Component {
             price: values.price,
             quantity: values.quantity,
             purchaseDate: values.purchaseDate,
-            currency: values.currency
+            currency_id: values.currency_id
         }
 
         if (+this.state.id === -1) {
@@ -91,13 +104,13 @@ class AssetComponent extends Component {
     }
 
     render() {
-        let {ticker, description, price, quantity, purchaseDate, currency} = this.state;
+        let {ticker, description, price, quantity, purchaseDate, currency_id, currencies} = this.state;
         return (
             <div>
                 <h1>Актив</h1>
                 <div className='container'>
                     <Formik
-                        initialValues={{ticker, description, price, quantity, purchaseDate, currency}}
+                        initialValues={{ticker, description, price, quantity, purchaseDate, currency_id, currencies}}
                         onSubmit={this.onSubmit}
                         validate={this.validate}
                         validateOnBlur={false}
@@ -135,10 +148,16 @@ class AssetComponent extends Component {
                                     </fieldset>
                                     <fieldset className="form-group row">
                                         <label>Валюта</label>
-                                        <Field className="form-control" as="select" name="currency">
-                                            <option value="RUB">Рубль</option>
-                                            <option value="USD">Доллар</option>
-                                            <option value="EUR">Евро</option>
+                                        <Field className="form-control" as="select" name="currency_id">
+                                            {
+                                                currencies.map((option)=>{
+                                                    return (
+                                                        <option key={option.id} value={option.id}>
+                                                            {option.description}
+                                                        </option>
+                                                    );
+                                                })
+                                            }
                                         </Field>
                                     </fieldset>
                                     <div className="divider"></div>
