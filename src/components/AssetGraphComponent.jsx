@@ -2,12 +2,12 @@ import React, {Component} from 'react'
 import DataService from "../api/DataService";
 import ReactApexChart from "react-apexcharts";
 import moment from "moment";
-import Micex from '../micex'
-
 
 class AssetGraphComponent extends Component {
     seriesData;
     seriesDataLinear;
+    startDate = '2020-01-01';
+    endDate = '2020-05-18';
 
     constructor(props) {
         super(props);
@@ -20,7 +20,7 @@ class AssetGraphComponent extends Component {
                 annotations: {
                     xaxis: [
                         {
-                            x: new Date('2014-06-01').getTime(),
+                            x: new Date('2020-01-01').getTime(),
                             borderColor: '#00E396',
                             label: {
                                 borderColor: '#00E396',
@@ -88,7 +88,7 @@ class AssetGraphComponent extends Component {
                 annotations: {
                     xaxis: [
                         {
-                            x: new Date('2014-06-01').getTime(),
+                            x: new Date('2020-01-01').getTime(),
                             borderColor: '#00E396',
                             label: {
                                 borderColor: '#00E396',
@@ -132,8 +132,8 @@ class AssetGraphComponent extends Component {
                     selection: {
                         enabled: false,
                         xaxis: {
-                            min: new Date('2013-10-31').getTime(),
-                            max: new Date('2014-12-30').getTime()
+                            min: new Date('2020-01-01').getTime(),
+                            max: new Date('2021-05-18').getTime()
                         },
                         fill: {
                             color: '#ccc',
@@ -189,10 +189,11 @@ class AssetGraphComponent extends Component {
     componentDidMount() {
         DataService.retrieveAsset(this.state.id)
             .then(response => {
-                let engine = 'stock', market = 'shares';
+                //let engine = 'stock', market = 'shares';
                 let seurity = response.data.ticker
                 this.setState(
                     {
+                        id: this.props.match.params.id,
                         ticker: response.data.ticker,
                         description: response.data.description,
                         price: response.data.price,
@@ -200,9 +201,54 @@ class AssetGraphComponent extends Component {
                         purchaseDate: moment(response.data.purchaseDate).format('YYYY-MM-DD'),
                         currency: response.data.currency
                     }
-                )
+                );
+/*
+*         "columns": [
+            0"open",
+            1"close",
+            2"high",
+            3"low",
+            4"value",
+            5"volume",
+            6"begin",
+            7"end"
+        ],
+        * */
+                DataService.retrieveCandles(seurity, this.startDate, this.endDate)
+                    .then(
+                        answer => {
+                            this.seriesData = answer.data.candles.data.map(item => {
+                                const container = {};
 
-                Micex.candles(engine, market, seurity)
+                                container['x'] = item[7]; //item.end;
+                                //[item.open, item.high, item.low, item.close];
+                                container.['y'] = [item[0], item[2], item[3], item[1]];
+
+                                return container;
+                            });
+                            this.seriesDataLinear = answer.data.candles.data.map(item => {
+                                const container = {};
+
+                                container['x'] = item[7]; //.end;
+                                container.['y'] = item[4]; //.value;
+
+                                return container;
+                            });
+
+
+                            this.setState({
+                                series: [{
+                                    data: this.seriesData
+                                }],
+                                seriesBar: [{
+                                    name: 'volume',
+                                    data: this.seriesDataLinear
+                                }]
+                            });
+                        }, error => {
+                            console.log(`Неизвестная ошибка: ${error}`);
+                        });
+/*                Micex.candles(engine, market, seurity)
                     .then(
                         answer => {
                             this.seriesData = answer.map(item => {
@@ -242,7 +288,7 @@ class AssetGraphComponent extends Component {
                             });
                         }, error => {
                             console.log(`Неизвестная ошибка: ${error}`);
-                        });
+                        });*/
 
 
             });

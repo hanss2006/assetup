@@ -3,14 +3,10 @@ import {JPA_API_URL} from "../Constants";
 
 class DataService {
 
-    /*
-        constructor() {
-            DataService.currencies.push({'key':'RUB', 'value':'Рубль'});
-            DataService.currencies.push({'key':'USD', 'value':'Доллар'});
-            DataService.currencies.push({'key':'EUR', 'value':'Евро'});
-        }
-        static currencies = [];
-    */
+    retrieveCandles(ticker, startDate, endDate){
+        return axios.get(`${JPA_API_URL}/proxy/${ticker}/${startDate}/${endDate}`);
+    }
+
     retrieveAllCurrency(){
         return axios.get(`${JPA_API_URL}/currencies`);
     }
