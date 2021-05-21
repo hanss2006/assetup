@@ -13,10 +13,9 @@ class AssetComponent extends Component {
             price: 0,
             quantity: 0,
             purchaseDate: moment(new Date()).format('YYYY-MM-YY'),
-            currency_id: 8,
-            currencies: []
+            currencyId: -1,
+            currencies:[]
         }
-        this.currencies = DataService.retrieveAllCurrency();
 
         this.onSubmit = this.onSubmit.bind(this);
         this.validate = this.validate.bind(this);
@@ -43,7 +42,7 @@ class AssetComponent extends Component {
                         price: response.data.price,
                         quantity: response.data.quantity,
                         purchaseDate: moment(response.data.purchaseDate).format('YYYY-MM-DD'),
-                        currency_id: response.data.currency_id
+                        currencyId: response.data.currencyId
                     }
                 );
             });
@@ -75,7 +74,7 @@ class AssetComponent extends Component {
             errors.price = 'Значение в поле цена должно быть цифровым';
         }
         if (!this.checkNumber(values.quantity)) {
-            errors.price = 'Значение в поле количество должно быть цифровым';
+            errors.quantity = 'Значение в поле количество должно быть цифровым';
         }
         if (!moment(values.purchaseDate).isValid()) {
             errors.purchaseDate = 'Введите значение даты';
@@ -91,7 +90,14 @@ class AssetComponent extends Component {
             price: values.price,
             quantity: values.quantity,
             purchaseDate: values.purchaseDate,
-            currency_id: values.currency_id
+            currencyId: values.currencyId
+        }
+
+        if (asset.currencyId===-1){
+            let rubind = this.state.currencies.findIndex(function (val) {
+                return val.name === 'RUB';
+            });
+            asset.currencyId = this.state.currencies[rubind].id;
         }
 
         if (+this.state.id === -1) {
@@ -104,13 +110,13 @@ class AssetComponent extends Component {
     }
 
     render() {
-        let {ticker, description, price, quantity, purchaseDate, currency_id, currencies} = this.state;
+        let {ticker, description, price, quantity, purchaseDate, currencyId, currencies} = this.state;
         return (
             <div>
                 <h1>Актив</h1>
                 <div className='container'>
                     <Formik
-                        initialValues={{ticker, description, price, quantity, purchaseDate, currency_id, currencies}}
+                        initialValues={{ticker, description, price, quantity, purchaseDate, currencyId, currencies}}
                         onSubmit={this.onSubmit}
                         validate={this.validate}
                         validateOnBlur={false}
@@ -148,9 +154,9 @@ class AssetComponent extends Component {
                                     </fieldset>
                                     <fieldset className="form-group row">
                                         <label>Валюта</label>
-                                        <Field className="form-control" as="select" name="currency_id">
+                                        <Field className="form-control" as="select" name="currencyId">
                                             {
-                                                currencies.map((option)=>{
+                                                this.state.currencies.map((option)=>{
                                                     return (
                                                         <option key={option.id} value={option.id}>
                                                             {option.description}
