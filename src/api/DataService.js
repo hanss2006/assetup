@@ -4,7 +4,7 @@ import {JPA_API_URL} from "../Constants";
 class DataService {
 
     retrieveCandles(ticker, startDate, endDate){
-        return axios.get(`${JPA_API_URL}/proxy/${ticker}/${startDate}/${endDate}`);
+        return axios.get(`${JPA_API_URL}/proxy/${ticker}?startDate=${startDate}&endDate=${endDate}`);
     }
 
     retrieveAllCurrency(){
