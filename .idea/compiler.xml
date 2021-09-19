@@ -11,7 +11,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="assetup" target="1.8" />
+      <module name="assetup" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
