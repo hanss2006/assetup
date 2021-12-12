@@ -1,118 +1,32 @@
-body { height: 100%; margin: 5; padding: 5; }
-
-.big-size{
-  width: 100%;
-}
-
-.bg-font{
-  font-size: large;
-  font-weight: bolder;
-  text-decoration: none;
-}
-.h-menu ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
-}
-
-.h-menu li {
-  float: left;
-  border-right:1px solid #bbb;
-}
-
-.h-menu .right-nav {
-  float: right;
-  border-right:1px solid #bbb;
-}
-
-.h-menu li:last-child {
-  border-right: none;
-}
-
-.h-menu li a {
+label {
   display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+  margin-top: 10px;
 }
 
-.h-menu li a:hover:not(.active) {
-  background-color: #111;
+.card-container.card {
+  max-width: 350px !important;
+  padding: 40px 40px;
 }
 
-.h-menu .active {
-  background-color: #4CAF50;
+.card {
+  background-color: #f7f7f7;
+  padding: 20px 25px 30px;
+  margin: 0 auto 25px;
+  margin-top: 50px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
 }
 
-.divider{
-  margin: 16px;
-}
-
-table {
-  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-  font-size: 12px;
-  background: white;
-  width: 100%;
-  border-collapse: collapse;
-  text-align: left;
-}
-th {
-  font-weight: normal;
-  color: #039;
-  border-bottom: 2px solid #6678b1;
-  padding: 2px 2px;
-}
-td {
-  color: #669;
-  padding: 3px 2px;
-  transition: .3s linear;
-  margin: 10px 0;
-}
-tr:hover td {
-  color: #6699ff;
-}
-
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 40px;
-  background-color: #222222;
-}
-
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.profile-img-card {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 10px;
+  display: block;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
 }
