@@ -71,7 +71,7 @@ class App extends Component {
     const { currentUser, showModeratorBoard, showAdminBoard } = this.state;
 
     return (
-      <Router location={history.location} navigator={history}>
+      <Router basename={process.env.PUBLIC_URL} location={history.location} navigator={history}>
         <div>
           <nav className="navbar navbar-expand navbar-dark bg-dark">
             <Link to={"/"} className="navbar-brand">
@@ -140,7 +140,7 @@ class App extends Component {
           </nav>
 
           <div className="container mt-3">
-            <Routes basename={process.env.PUBLIC_URL}>
+            <Routes>
               <Route exact path="/" element={<Home/>} />
               <Route exact path="/home" element={<Home/>} />
               <Route exact path="/login" element={<Login/>} />
