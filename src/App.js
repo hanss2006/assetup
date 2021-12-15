@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {Router, Routes, Route, Link} from "react-router-dom";
+import {BrowserRouter, Routes, Route, Link} from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -71,7 +71,7 @@ class App extends Component {
     const { currentUser, showModeratorBoard, showAdminBoard } = this.state;
 
     return (
-      <Router basename={process.env.PUBLIC_URL} location={history.location} navigator={history}>
+      <BrowserRouter basename="/assetup" location={history.location} navigator={history}>
         <div>
           <nav className="navbar navbar-expand navbar-dark bg-dark">
             <Link to={"/"} className="navbar-brand">
@@ -155,7 +155,7 @@ class App extends Component {
 
           {/* <AuthVerify logOut={this.logOut}/> */}
         </div>
-      </Router>
+      </BrowserRouter>
     );
   }
 }
