@@ -18,6 +18,7 @@ import { history } from './helpers/history';
 import ErrorComponent from "./components/error.component";
 import Menu from "./components/menu.component";
 import {clearMessage} from "./actions/message";
+import { connect } from "react-redux";
 
 class App extends Component {
   constructor(props) {
@@ -52,4 +53,8 @@ class App extends Component {
     );
   }
 }
-export default App;
+
+function mapStateToProps(state) {
+}
+
+export default connect(mapStateToProps)(App);
