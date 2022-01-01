@@ -1,18 +1,25 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <meta name="theme-color" content="#000000"/>
-  <meta name="description" content="Accounting for exchange-traded assets"/>
-  <base href="/assetup/"/>
-  <link rel="apple-touch-icon" href="images/assetup.png"/>
-  <link rel="icon" href="images/assetup.png"/>
-  <link rel="manifest" href="manifest.json"/>
-  <title>Accounting for exchange-traded assets</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="theme-color" content="#000000"/>
+    <meta name="description" content="Accounting for exchange-traded assets"/>
+    <base href="/assetup/"/>
+    <link rel="apple-touch-icon" href="images/assetup.png"/>
+    <link rel="icon" href="images/assetup.png"/>
+    <link rel="manifest" href="manifest.json"/>
+    <title>Accounting for exchange-traded assets</title>
 </head>
 <body>
 <noscript>You need to enable JavaScript to run this app.</noscript>
 <div id="root"></div>
+<script>
+    "serviceWorker" in navigator && window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./serviceworker.js")
+            .then(e => console.log("Success: ", e.scope))
+            .catch(e => console.log("Failure: ", e))
+    })
+</script>
 </body>
 </html>
