@@ -55,6 +55,10 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
+  const { message } = state.message;
+  return {
+    message
+  };
 }
 
 export default connect(mapStateToProps)(App);
