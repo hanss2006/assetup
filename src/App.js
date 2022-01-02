@@ -7,10 +7,6 @@ import "./App.css";
 import Login from "./components/login.component";
 import Register from "./components/register.component";
 import Home from "./components/home.component";
-import Profile from "./components/profile.component";
-import BoardUser from "./components/board-user.component";
-import BoardModerator from "./components/board-moderator.component";
-import BoardAdmin from "./components/board-admin.component";
 
 import { history } from './helpers/history';
 
@@ -19,6 +15,8 @@ import ErrorComponent from "./components/error.component";
 import Menu from "./components/menu.component";
 import {clearMessage} from "./actions/message";
 import { connect } from "react-redux";
+import ListComponent from "./components/list.component";
+import Profile from "./components/profile.component";
 
 class App extends Component {
   constructor(props) {
@@ -30,7 +28,7 @@ class App extends Component {
 
   render() {
     return (
-      <BrowserRouter basename="/assetup" location={history.location} navigator={history}>
+      <BrowserRouter basename={process.env.PUBLIC_URL} location={history.location} navigator={history}>
         <div>
           <Menu/>
           <div className="container mt-3">
@@ -39,11 +37,15 @@ class App extends Component {
               <Route exact path="/home" element={<Home/>} />
               <Route exact path="/login" element={<Login/>} />
               <Route exact path="/register" element={<Register/>} />
+              <Route exact path="/assets" element={<ListComponent/>}/>
               <Route exact path="/profile" element={<Profile/>} />
+              <Route path="*" element={<ErrorComponent/>} />
+{/*
               <Route path="/user" element={<BoardUser/>} />
               <Route path="/mod" element={<BoardModerator/>} />
               <Route path="/admin" element={<BoardAdmin/>} />
-              <Route path="*" element={<ErrorComponent/>} />
+              <AuthenticatedRoute path="/assets/:id" component={AssetComponent}/>
+*/}
             </Routes>
           </div>
 

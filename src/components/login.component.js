@@ -53,13 +53,15 @@ class Login extends Component {
 
     this.form.validateAll();
 
-    const { dispatch, history } = this.props;
+    const { dispatch } = this.props;
 
     if (this.checkBtn.context._errors.length === 0) {
       dispatch(login(this.state.username, this.state.password))
         .then(() => {
+/*
           history.push("/profile");
           window.location.reload();
+*/
         })
         .catch(() => {
           this.setState({
@@ -77,7 +79,7 @@ class Login extends Component {
     const { isLoggedIn, message } = this.props;
 
     if (isLoggedIn) {
-      return <Navigate to="/profile" />;
+      return <Navigate to="/assets" />;
     }
 
     return (

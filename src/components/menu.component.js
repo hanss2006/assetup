@@ -26,14 +26,24 @@ class MenuComponent extends Component {
 
     render() {
         const currentUser = this.props.user;
+/*
         const showModeratorBoard = (this.props.user)? this.props.user.roles.includes("ROLE_MODERATOR") : false;
         const showAdminBoard =  (this.props.user)? this.props.user.roles.includes("ROLE_ADMIN") : false;
+*/
         return (
             <nav className="navbar navbar-expand navbar-dark bg-dark">
                 <Link to={"/"} className="navbar-brand">
                     Assetup
                 </Link>
                 <div className="navbar-nav mr-auto">
+                    {currentUser && (
+                        <li className="nav-item">
+                            <Link to={"/assets"} className="nav-link">
+                                Assets
+                            </Link>
+                        </li>
+                    )}
+                {/*
                     <li className="nav-item">
                         <Link to={"/home"} className="nav-link">
                             Home
@@ -63,6 +73,7 @@ class MenuComponent extends Component {
                             </Link>
                         </li>
                     )}
+*/}
                 </div>
 
                 {currentUser ? (
