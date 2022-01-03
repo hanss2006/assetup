@@ -51,7 +51,7 @@ class ListComponent extends Component {
     refresh() {
         UserService.retrieveAllAssets().then(
             response => {
-                this.setState({assets: response.data})
+                this.setState({assets: response.data.content})
             }
         )
     }
