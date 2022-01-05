@@ -19,17 +19,16 @@ const required = (value) => {
 };
 
 class Login extends Component {
+  state = {
+    username: "",
+    password: "",
+    loading: false,
+  };
   constructor(props) {
     super(props);
     this.handleLogin = this.handleLogin.bind(this);
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
-
-    this.state = {
-      username: "",
-      password: "",
-      loading: false,
-    };
   }
 
   onChangeUsername(e) {
@@ -79,7 +78,7 @@ class Login extends Component {
     const { isLoggedIn, message } = this.props;
 
     if (isLoggedIn) {
-      return <Navigate to="/assets" />;
+      return <Navigate to="/profile" />;
     }
 
     return (
