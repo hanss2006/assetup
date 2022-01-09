@@ -273,7 +273,7 @@ class AssetList extends Component {
                                         <td>
                                             <ButtonGroup>
                                                 <Link
-                                                    to={"edit/" + asset.id}
+                                                    to={"./" + asset.id}
                                                     className="btn btn-sm btn-outline-primary"
                                                 >
                                                     <FontAwesomeIcon icon={faEdit} />

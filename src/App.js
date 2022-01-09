@@ -39,7 +39,7 @@ class App extends Component {
               <Route exact path="/login" element={<Login/>} />
               <Route exact path="/register" element={<Register/>} />
               <Route exact path="/assets" element={<AssetList/>}/>
-              <Route exact path="/assets/edit/:id" element={<Asset/>} />
+              <Route exact path="/assets/:id" element={<Asset/>} />
               <Route exact path="/profile" element={<Profile/>} />
               <Route path="*" element={<ErrorComponent/>} />
 {/*
