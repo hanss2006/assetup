@@ -40,7 +40,8 @@ const Asset = (props) => {
     };
 
     const updateContent = () => {
-        dispatch(updateAsset(currentAsset.id, currentAsset))
+        dispatch(updateAsset(currentAsset));
+/*
             .then(response => {
                 console.log(response);
 
@@ -49,6 +50,7 @@ const Asset = (props) => {
             .catch(e => {
                 console.log(e);
             });
+*/
     };
 
     const removeAsset = () => {
